@@ -1,7 +1,7 @@
 {
   "civilian_ai": {
-    "prefix": ["Builder", "Survivor", "Panic", "Citizen", "Alpha", "Omega", "Unit", "Subject", "Dweller", "Noob", "Pro", "Casual", "Hardcore", "Lost", "Found", "Laggy", "Glitch", "Shadow", "Wild", "Quiet", "Loud", "Swift", "Heavy", "Light", "Deep", "High", "Low", "Cyber", "Steam", "Mecha"],
-    "name": ["Bob", "Steve", "Alex", "Kevin", "Shard", "Spark", "Block", "Creeper", "Enderman", "Wither", "Herobrine", "Entity", "Crafter", "Miner", "Slayer", "Helper", "Traitor", "Hero", "Ghost", "Specter", "Blade", "Shield", "Hammer", "Anvil", "Pickaxe", "Shovel", "Hoe", "Sword", "Bow", "Arrow"],
+    "prefix": ["Builder", "Survivor", "Panic", "Citizen", "Alpha", "Omega", "Unit", "Subject", "Dweller", "Noob", "Pro", "Casual", "Hardcore", "Lost", "Found", "Laggy", "Glitch", "Shadow", "Wild", "Quiet", "Loud", "Swift", "Heavy", "Light", "Deep", "High", "Low", "Cyber", "Steam", "Mecha", "Poopy", "Peefull","Buttlike", "ScaredyKat", "Disturbed", "The one that did a big airplane fart and disturbed the entire world and the fart was so loud it was louder than krakatoa and it smeeled so bad people couldnt smeel it also SUBSCRIBE"],
+    "name": ["Bob", "Steve", "Alex", "Kevin", "Shard", "Spark", "Block", "Creeper", "Enderman", "Wither", "Herobrine", "Entity", "Crafter", "Miner", "Slayer", "Helper", "Traitor", "Hero", "Ghost", "Specter", "Blade", "Shield", "Hammer", "Anvil", "Pickaxe", "Shovel", "Hoe", "Sword", "Bow", "Arrow", "YourMom", "BruhBot", "jiahfjafljalfa", "MrBeast", "Karl" ],
     "suffix": ["MC", "LP", "YT", "TV", "Pro", "OG", "77", "99", "001", "X", "V2", "Prime", "Apex", "Zero", "The_Great", "The_Mad", "The_Sad", "The_Lost", "The_Found", "The_Last", "Mk1", "Mk42", "Final", "Alpha"]
   },
   "fbi_federal": {
