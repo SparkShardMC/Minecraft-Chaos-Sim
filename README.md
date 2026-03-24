@@ -12,7 +12,7 @@ Using custom commands, I trigger 10 distinct disasters to test the "Super-Buildi
 
 ### 🎭 The "Everything Has a Name" System
 In this simulation, **nothing is anonymous**. 
-- **Players:** Named using a mix of Serial IDs (`Person_67`), Real names (`Alice`, `Kevin`), and Chaos names (`CreeperMagnet`, `Wait_Wheres_The_Roof`).
+- **Players:** Named using a mix of Serial IDs (`Person_67`), Real names (`Alice`, `Kevin`), and Chaos names (`CreeperMagnet`, `Wait_Wheres_The_Roof`). And some super short names like (`The one that did a big airplane fart and disturbed the entire world and the fart was so loud it was louder than krakatoa and it smeeled so bad people couldnt smeel it also SUBSCRIBE`)
 - **The Legend of Bob:** There is a 1% chance for a "Bob" to spawn. Bob is immune to panic logic. Bob just mines. Bob is eternal.
 - **Sentient Blocks:** Every block placed by an AI is assigned a name (e.g., `Load-Bearing Dirt`, `Gary the Glass`).
 
