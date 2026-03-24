@@ -1,0 +1,21 @@
+{
+  "civilian_ai": {
+    "prefix": ["Builder", "Survivor", "Panic", "Citizen", "Alpha", "Omega", "Unit", "Subject", "Dweller", "Noob", "Pro", "Casual", "Hardcore", "Lost", "Found", "Laggy", "Glitch", "Shadow", "Wild", "Quiet", "Loud", "Swift", "Heavy", "Light", "Deep", "High", "Low", "Cyber", "Steam", "Mecha"],
+    "name": ["Bob", "Steve", "Alex", "Kevin", "Shard", "Spark", "Block", "Creeper", "Enderman", "Wither", "Herobrine", "Entity", "Crafter", "Miner", "Slayer", "Helper", "Traitor", "Hero", "Ghost", "Specter", "Blade", "Shield", "Hammer", "Anvil", "Pickaxe", "Shovel", "Hoe", "Sword", "Bow", "Arrow"],
+    "suffix": ["MC", "LP", "YT", "TV", "Pro", "OG", "77", "99", "001", "X", "V2", "Prime", "Apex", "Zero", "The_Great", "The_Mad", "The_Sad", "The_Lost", "The_Found", "The_Last", "Mk1", "Mk42", "Final", "Alpha"]
+  },
+  "fbi_federal": {
+    "rank": ["Director", "Special Agent", "Field Lead", "Breacher", "Intel", "Sniper", "Riot", "Tactical", "Federal", "State"],
+    "codename": ["Eagle", "Falcon", "Wolf", "Bear", "Lion", "Tiger", "Snake", "Shark", "Hawk", "Vulture"],
+    "id": ["Red", "Blue", "Gold", "Sierra", "Delta", "Echo", "Whiskey", "Tango", "Foxtrot", "Zulu"]
+  },
+  "mafia_syndicate": {
+    "title": ["Don", "Underboss", "Consigliere", "Capo", "Soldier", "Enforcer", "Associate", "Cleaner", "Fixer", "Boss"],
+    "nickname": ["Quick", "Slow", "Big", "Little", "Fat", "Skinny", "Mad", "Smiling", "Silent", "Loud"],
+    "surname": ["Corleone", "Capone", "Luciano", "Gotti", "Gambino", "Genovese", "Bonanno", "Colombo", "Lucchese", "Soprano"]
+  },
+  "sentient_blocks": {
+    "adj": ["Load-Bearing", "Emotional-Support", "Tactical", "Sentient", "Panic-Built", "Illegal", "Suspicious", "Traitorous", "Structural", "Leaking", "Vibrating", "Cursed", "Blessed", "Stolen", "Premium", "Budget", "Hyper-Reinforced", "Overpriced", "Wobbly", "Ancient", "Futuristic", "Alien", "Mafia-Owned", "FBI-Seized", "Confiscated", "Radioactive", "Unstable", "Sacrificial", "Heroic", "Cowardly"],
+    "noun": ["Protector", "Mistake", "Unit", "Wall-y", "Chunk", "Survivor", "Witness", "Boundary", "Anchor", "Holdout", "Deflector", "Sacrifice", "Legacy", "Barrier", "Obstacle", "Safety-Net", "Last-Stand", "Foundation", "Cornerstone", "Pillar", "Support", "Failure", "Success", "Miracle", "Anomaly", "Brick", "Friend", "Enemy", "Guardian", "Wall"]
+  }
+}
