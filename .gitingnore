@@ -1,0 +1,59 @@
+# --- Java & Gradle ---
+.gradle/
+build/
+bin/
+out/
+.gradle-snapshot-*
+gradle-app.setting
+
+# --- IntelliJ IDEA ---
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!/.idea/icon.png
+!/.idea/runConfigurations/
+
+# --- Eclipse ---
+.metadata/
+.classpath
+.project
+.settings/
+.factorypath
+
+# --- Visual Studio Code ---
+.vscode/
+
+# --- Minecraft Run Directory (The most important part!) ---
+# This prevents your test worlds and logs from being uploaded.
+run/
+runClient/
+runServer/
+runData/
+saves/
+logs/
+screenshots/
+resourcepacks/
+shaderpacks/
+mods/
+config/
+usercache.json
+usernamecache.json
+whitelist.json
+ops.json
+server.properties
+
+# --- OS Specific ---
+.DS_Store
+thumbs.db
+
+# --- Replay Mod & Recording Junk ---
+replay_recordings/
+replay_videos/
+.replaymod/
+
+# --- Chaos Sim Specific ---
+# If you generate local name lists or temp AI logs
+temp_ai_logs/
+bot_configs/*.local.json
