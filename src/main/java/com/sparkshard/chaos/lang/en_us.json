@@ -1,0 +1,9 @@
+{
+  "entity.chaos.fbi_agent": "FBI Agent",
+  "entity.chaos.mafia_member": "Mafia Member",
+  "itemGroup.chaos.tab": "Sparkshard Chaos",
+  "death.attack.tornado": "%1$s was claimed by the storm",
+  "death.attack.mafia_hit": "%1$s was whacked by the Mafia",
+  "text.chaos.war_start": "§4§l[!!!] TERRITORY WAR: FBI VS MAFIA",
+  "text.chaos.tornado_warning": "§6§l[!] WEATHER ALERT: Tornado touched down!"
+}
