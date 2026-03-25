@@ -1,7 +1,7 @@
 # 🌪️ Minecraft Chaos Civilization Sim: 100 AI vs. The Apocalypse
 **100 Autonomous Agents. 10 World-Ending Disasters. Zero Scarcity. One Winner.**
 
-This repository contains the source code for a custom NeoForge mod designed for high-stakes social experiments in Minecraft. Watch as 100 AI players form civilizations, build "Super-Bunkers," and attempt to survive both natural disasters and tactical raids.
+This repository contains the source code for a custom Fabric mod designed for high-stakes social experiments in Minecraft. Watch as 100 AI players form civilizations, build "Super-Bunkers," and attempt to survive both natural disasters and tactical raids.
 
 ---
 
@@ -45,7 +45,7 @@ The agents are powered by a custom **Baritone API** bridge. Their behavior cycle
 ---
 
 ## 🛠️ Installation & Tech Stack
-- **Version:** Minecraft 1.21.x (NeoForge)
+- **Version:** Minecraft 1.21.x (Fabric)
 - **Key Mods Integrated:**
     - **Weather2:** For Tornado/Hurricane physics.
     - **The Lost Cities:** For the "Wasteland" city generation.
