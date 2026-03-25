@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "chaos",
+  "version": "1.0.0",
+  "name": "Sparkshard Chaos Mod",
+  "description": "A 500x500 city disaster simulator with FBI raids, Mafia wars, and extreme weather destruction.",
+  "authors": [
+    "Sparkshard"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/yourusername/chaos-mod"
+  },
+  "license": "MIT",
+  "icon": "assets/chaos/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.sparkshard.chaos.ChaosMod"
+    ]
+  },
+  "mixins": [
+    "chaos.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "fabric-api": "*",
+    "geckolib": ">=4.4"
+  },
+  "recommends": {
+    "modmenu": "*"
+  },
+  "suggests": {
+    "cloth-config": "*",
+    "weather-tornado-classic": ">=1.21"
+  }
+}
