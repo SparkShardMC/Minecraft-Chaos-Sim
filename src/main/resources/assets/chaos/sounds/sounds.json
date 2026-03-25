@@ -15,6 +15,10 @@
     "category": "hostile",
     "sounds": ["chaos:entity/mafia/sword_draw"]
   },
+  "entity.scream": {
+    "category": "hostile",
+    "sounds": ["chaos:all/scream"]
+  },
   "disaster.tornado_roar": {
     "category": "weather",
     "sounds": [
