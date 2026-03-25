@@ -1,0 +1,51 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.mafia.run": {
+      "animation_length": 0.5,
+      "loop": true,
+      "bones": {
+        "Right Leg": {
+          "rotation": {
+            "0.0": {"vector": [-11.0, 0.0, 2.0], "easing": "linear"},
+            "0.25": {"vector": [11.0, 0.0, 2.0], "easing": "linear"},
+            "0.5": {"vector": [-11.0, 0.0, 2.0], "easing": "linear"}
+          }
+        },
+        "Left Leg": {
+          "rotation": {
+            "0.0": {"vector": [10.0, 0.0, -2.0], "easing": "linear"},
+            "0.25": {"vector": [-10.0, 0.0, -2.0], "easing": "linear"},
+            "0.5": {"vector": [10.0, 0.0, -2.0], "easing": "linear"}
+          }
+        }
+      }
+    },
+    "animation.mafia.idle": {
+      "animation_length": 1.0,
+      "loop": true,
+      "bones": {
+        "Body": {
+          "position": {
+            "0.0": {"vector": [0.0, 0.0, 0.0], "easing": "linear"},
+            "0.5": {"vector": [0.0, 0.2, 0.0], "easing": "linear"},
+            "1.0": {"vector": [0.0, 0.0, 0.0], "easing": "linear"}
+          }
+        }
+      }
+    },
+    "animation.mafia.attack_sword": {
+      "animation_length": 0.5,
+      "loop": false,
+      "bones": {
+        "Left Arm": {
+          "rotation": {
+            "0.0": {"vector": [132.5, 0.0, 0.0], "easing": "linear"},
+            "0.4167": {"vector": [42.01, -3.2, 6.45], "easing": "linear"},
+            "0.5": {"vector": [10.0, 0.0, 0.0], "easing": "linear"}
+          }
+        }
+      }
+    }
+  }
+}
