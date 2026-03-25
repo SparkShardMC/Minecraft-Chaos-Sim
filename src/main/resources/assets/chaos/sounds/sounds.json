@@ -1,0 +1,31 @@
+{
+  "fbi.kick": {
+    "category": "hostile",
+    "sounds": ["chaos:entity/fbi/fbi_kick"]
+  },
+  "fbi.open_up": {
+    "category": "hostile",
+    "sounds": ["chaos:entity/fbi/fbi_open_up"]
+  },
+  "mafia.whistle": {
+    "category": "hostile",
+    "sounds": ["chaos:entity/mafia/mafia_whistle"]
+  },
+  "mafia.sword_draw": {
+    "category": "hostile",
+    "sounds": ["chaos:entity/mafia/sword_draw"]
+  },
+  "disaster.tornado_roar": {
+    "category": "weather",
+    "sounds": [
+      {
+        "name": "chaos:disasters/tornado/roar",
+        "stream": true
+      }
+    ]
+  },
+  "env.glass_shatter": {
+    "category": "block",
+    "sounds": ["chaos:disasters/buildings/glass_shatter"]
+  }
+}
