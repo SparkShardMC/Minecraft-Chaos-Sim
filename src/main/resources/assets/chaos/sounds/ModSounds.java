@@ -7,20 +7,26 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 public class ModSounds {
-    // FBI Sounds
+    
+    // --- FBI Sounds ---
     public static final SoundEvent FBI_KICK = registerSound("fbi.kick");
     public static final SoundEvent FBI_OPEN_UP = registerSound("fbi.open_up");
     
-    // Mafia Sounds
+    // --- Mafia Sounds ---
     public static final SoundEvent MAFIA_WHISTLE = registerSound("mafia.whistle");
+    public static final SoundEvent MAFIA_DEATH_WHISTLE = registerSound("mafia.death_whistle");
     public static final SoundEvent SWORD_DRAW = registerSound("mafia.sword_draw");
 
-    // Disaster Sounds
+    // --- Disaster & Environment ---
     public static final SoundEvent TORNADO_ROAR = registerSound("disaster.tornado_roar");
     public static final SoundEvent GLASS_SHATTER = registerSound("env.glass_shatter");
+    
+    // --- The Scream (From assets/chaos/sounds/all/scream.ogg) ---
+    public static final SoundEvent ENTITY_SCREAM = registerSound("entity.scream");
 
     private static SoundEvent registerSound(String name) {
-        Identifier id = new Identifier(ChaosMod.MODID, name);
+        // Updated for 1.21: Identifier.of is the new standard
+        Identifier id = Identifier.of(ChaosMod.MODID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
