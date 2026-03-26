@@ -26,7 +26,7 @@ public class DisasterCommand {
             .then(CommandManager.literal("mafia").executes(context -> spawnEntityGroup(context.getSource(), "mafia")))
             .then(CommandManager.literal("war").executes(context -> spawnEntityGroup(context.getSource(), "war")))
 
-            // 2. Tornado (f0-f5)
+            // 2. Tornado
             .then(CommandManager.literal("tornado")
                 .then(CommandManager.argument("power", StringArgumentType.word())
                     .suggests((context, builder) -> {
@@ -35,18 +35,15 @@ public class DisasterCommand {
                     })
                     .executes(context -> {
                         String power = StringArgumentType.getString(context, "power");
-                        ServerCommandSource source = context.getSource();
-                        BlockPos pos = BlockPos.ofFloored(source.getPosition());
                         int intensity = parseIntensity(power);
-
-                        WeatherController.spawnCustomTornado(source.getWorld(), pos, intensity);
-                        source.sendFeedback(() -> Text.literal("§6§l[!] WEATHER ALERT: Tornado " + power.toUpperCase() + " touched down!"), true);
+                        WeatherController.spawnCustomTornado(context.getSource().getWorld(), BlockPos.ofFloored(context.getSource().getPosition()), intensity);
+                        context.getSource().sendFeedback(() -> Text.literal("§6§l[!] WEATHER ALERT: Tornado " + power.toUpperCase() + " touched down!"), true);
                         return 1;
                     })
                 )
             )
 
-            // 3. Hurricane (type1-type5)
+            // 3. Hurricane
             .then(CommandManager.literal("hurricane")
                 .then(CommandManager.argument("type", StringArgumentType.word())
                     .suggests((context, builder) -> {
@@ -55,80 +52,70 @@ public class DisasterCommand {
                     })
                     .executes(context -> {
                         String typeStr = StringArgumentType.getString(context, "type");
-                        ServerCommandSource source = context.getSource();
-                        BlockPos pos = BlockPos.ofFloored(source.getPosition());
-                        
-                        // Extract number from "typeX"
                         int intensity = parseHurricaneType(typeStr);
-
-                        HurricaneHandler.spawnHurricane(source.getWorld(), pos, intensity);
-                        source.sendFeedback(() -> Text.literal("§1§l[!!!] HURRICANE WARNING: " + typeStr.toUpperCase() + " incoming!"), true);
+                        HurricaneHandler.spawnHurricane(context.getSource().getWorld(), BlockPos.ofFloored(context.getSource().getPosition()), intensity);
+                        context.getSource().sendFeedback(() -> Text.literal("§1§l[!!!] HURRICANE WARNING: " + typeStr.toUpperCase() + " incoming!"), true);
                         return 1;
                     })
                 )
             )
 
-            // 4. City Builder
+            // 4. Hail
+            .then(CommandManager.literal("hail")
+                .then(CommandManager.argument("size", StringArgumentType.word())
+                    .suggests((context, builder) -> {
+                        builder.suggest("size1").suggest("size2").suggest("size3").suggest("size4").suggest("size5");
+                        return builder.buildFuture();
+                    })
+                    .executes(context -> {
+                        String sizeStr = StringArgumentType.getString(context, "size");
+                        int intensity = Integer.parseInt(sizeStr.replace("size", ""));
+                        HailHandler.spawnHailStorm(context.getSource().getWorld(), BlockPos.ofFloored(context.getSource().getPosition()), intensity);
+                        context.getSource().sendFeedback(() -> Text.literal("§b§l[!] HAILSTORM WARNING"), true);
+                        return 1;
+                    })
+                )
+            )
+
+            // 5. Sandstorm
+            .then(CommandManager.literal("sandstorm")
+                .executes(context -> {
+                    SandstormHandler.spawnSandstorm(context.getSource().getWorld(), BlockPos.ofFloored(context.getSource().getPosition()), 5);
+                    context.getSource().sendFeedback(() -> Text.literal("§e§l[!] SANDSTORM APPROACHING"), true);
+                    return 1;
+                }))
+
+            // 6. Snowstorm
+            .then(CommandManager.literal("snowstorm")
+                .executes(context -> {
+                    BlizzardHandler.spawnBlizzard(context.getSource().getWorld(), BlockPos.ofFloored(context.getSource().getPosition()), 5);
+                    context.getSource().sendFeedback(() -> Text.literal("§f§l[!] BLIZZARD WARNING"), true);
+                    return 1;
+                }))
+
+            // 7. Firenado
+            .then(CommandManager.literal("firenado")
+                .then(CommandManager.argument("power", StringArgumentType.word())
+                    .suggests((context, builder) -> {
+                        builder.suggest("f1").suggest("f2").suggest("f3").suggest("f4").suggest("f5");
+                        return builder.buildFuture();
+                    })
+                    .executes(context -> {
+                        String power = StringArgumentType.getString(context, "power");
+                        int intensity = parseIntensity(power);
+                        FirenadoHandler.spawnFirenado(context.getSource().getWorld(), BlockPos.ofFloored(context.getSource().getPosition()), intensity);
+                        context.getSource().sendFeedback(() -> Text.literal("§6§l[!] EMERGENCY: §c§lFIRENADO SIGHTED"), true);
+                        return 1;
+                    })
+                )
+            )
+
+            // 8. City Builder
             .then(CommandManager.literal("build_city")
                 .executes(context -> {
-                    BlockPos pos = BlockPos.ofFloored(context.getSource().getPosition());
-                    MapGenerator.generateMegaMap(context.getSource().getWorld(), pos);
-                    context.getSource().sendFeedback(() -> Text.literal("§a§l[!] City Grid Generated! Prepare for Chaos."), true);
+                    MapGenerator.generateMegaMap(context.getSource().getWorld(), BlockPos.ofFloored(context.getSource().getPosition()));
+                    context.getSource().sendFeedback(() -> Text.literal("§a§l[!] City Grid Generated!"), true);
                     return 1;
                 }))
         );
     }
-
-    private static int parseIntensity(String power) {
-        return switch (power.toLowerCase()) {
-            case "f1" -> 1;
-            case "f2" -> 2;
-            case "f3" -> 3;
-            case "f4" -> 4;
-            case "f5" -> 5;
-            default -> 0;
-        };
-    }
-
-    private static int parseHurricaneType(String type) {
-        return switch (type.toLowerCase()) {
-            case "type2" -> 2;
-            case "type3" -> 3;
-            case "type4" -> 4;
-            case "type5" -> 5;
-            default -> 1; // Default to type1
-        };
-    }
-
-    private static int spawnEntityGroup(ServerCommandSource source, String type) {
-        ServerWorld world = source.getWorld();
-        BlockPos pos = BlockPos.ofFloored(source.getPosition());
-        
-        if (type.equals("fbi") || type.equals("war")) {
-            for (int i = 0; i < 50; i++) {
-                EntityFBI fbi = new EntityFBI(EntityRegistry.FBI_AGENT, world);
-                double x = pos.getX() + (world.random.nextDouble() * 24 - 12);
-                double z = pos.getZ() + (world.random.nextDouble() * 24 - 12);
-                fbi.refreshPositionAndAngles(x, pos.getY(), z, world.random.nextFloat() * 360, 0);
-                world.spawnEntity(fbi);
-            }
-        }
-
-        if (type.equals("mafia") || type.equals("war")) {
-            for (int i = 0; i < 50; i++) {
-                EntityMafia mafia = new EntityMafia(EntityRegistry.MAFIA_MEMBER, world);
-                double x = pos.getX() + (world.random.nextDouble() * 24 - 12);
-                double z = pos.getZ() + (world.random.nextDouble() * 24 - 12);
-                mafia.refreshPositionAndAngles(x, pos.getY(), z, world.random.nextFloat() * 360, 0);
-                world.spawnEntity(mafia);
-            }
-        }
-
-        switch (type) {
-            case "fbi" -> source.sendFeedback(() -> Text.literal("§l§c[!] FBI RAID IN PROGRESS"), true);
-            case "mafia" -> source.sendFeedback(() -> Text.literal("§l§8[!] MAFIA TAKEOVER STARTED"), true);
-            case "war" -> source.sendFeedback(() -> Text.literal("§4§l[!!!] TERRITORY WAR: FBI VS MAFIA"), true);
-        }
-        return 1;
-    }
-}
