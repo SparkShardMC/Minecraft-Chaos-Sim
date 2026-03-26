@@ -6,6 +6,7 @@ import com.sparkshard.chaos.entity.EntityFBI;
 import com.sparkshard.chaos.entity.EntityMafia;
 import com.sparkshard.chaos.entity.EntityRegistry;
 import com.sparkshard.chaos.util.WeatherController;
+import com.sparkshard.chaos.util.HurricaneHandler;
 import com.sparkshard.chaos.world.MapGenerator;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -16,19 +17,12 @@ import net.minecraft.util.math.BlockPos;
 public class DisasterCommand {
     public static void register(CommandDispatcher<ServerCommandSource, ?> dispatcher) {
         dispatcher.register(CommandManager.literal("disaster")
-            // 1. /disaster fbi
-            .then(CommandManager.literal("fbi")
-                .executes(context -> spawnEntityGroup(context.getSource(), "fbi")))
-            
-            // 2. /disaster mafia
-            .then(CommandManager.literal("mafia")
-                .executes(context -> spawnEntityGroup(context.getSource(), "mafia")))
-            
-            // 3. /disaster war (FBI + Mafia only)
-            .then(CommandManager.literal("war")
-                .executes(context -> spawnEntityGroup(context.getSource(), "war")))
+            // 1. Spawns
+            .then(CommandManager.literal("fbi").executes(context -> spawnEntityGroup(context.getSource(), "fbi")))
+            .then(CommandManager.literal("mafia").executes(context -> spawnEntityGroup(context.getSource(), "mafia")))
+            .then(CommandManager.literal("war").executes(context -> spawnEntityGroup(context.getSource(), "war")))
 
-            // 4. /disaster tornado <power> (e.g., /disaster tornado f5)
+            // 2. Tornado (f0-f5)
             .then(CommandManager.literal("tornado")
                 .then(CommandManager.argument("power", StringArgumentType.word())
                     .suggests((context, builder) -> {
@@ -39,20 +33,38 @@ public class DisasterCommand {
                         String power = StringArgumentType.getString(context, "power");
                         ServerCommandSource source = context.getSource();
                         BlockPos pos = BlockPos.ofFloored(source.getPosition());
-
-                        // Map the string (f0-f5) to an integer (0-5)
                         int intensity = parseIntensity(power);
 
-                        // Trigger the Weather and Tornadoes Remastered mod logic
                         WeatherController.spawnCustomTornado(source.getWorld(), pos, intensity);
-
                         source.sendFeedback(() -> Text.literal("§6§l[!] WEATHER ALERT: Tornado " + power.toUpperCase() + " touched down!"), true);
                         return 1;
                     })
                 )
             )
 
-            // 5. /disaster build_city (Triggers the MapGenerator)
+            // 3. Hurricane (type1-type5)
+            .then(CommandManager.literal("hurricane")
+                .then(CommandManager.argument("type", StringArgumentType.word())
+                    .suggests((context, builder) -> {
+                        builder.suggest("type1").suggest("type2").suggest("type3").suggest("type4").suggest("type5");
+                        return builder.buildFuture();
+                    })
+                    .executes(context -> {
+                        String typeStr = StringArgumentType.getString(context, "type");
+                        ServerCommandSource source = context.getSource();
+                        BlockPos pos = BlockPos.ofFloored(source.getPosition());
+                        
+                        // Extract number from "typeX"
+                        int intensity = parseHurricaneType(typeStr);
+
+                        HurricaneHandler.spawnHurricane(source.getWorld(), pos, intensity);
+                        source.sendFeedback(() -> Text.literal("§1§l[!!!] HURRICANE WARNING: " + typeStr.toUpperCase() + " incoming!"), true);
+                        return 1;
+                    })
+                )
+            )
+
+            // 4. City Builder
             .then(CommandManager.literal("build_city")
                 .executes(context -> {
                     BlockPos pos = BlockPos.ofFloored(context.getSource().getPosition());
@@ -70,7 +82,17 @@ public class DisasterCommand {
             case "f3" -> 3;
             case "f4" -> 4;
             case "f5" -> 5;
-            default -> 0; // f0 or invalid input
+            default -> 0;
+        };
+    }
+
+    private static int parseHurricaneType(String type) {
+        return switch (type.toLowerCase()) {
+            case "type2" -> 2;
+            case "type3" -> 3;
+            case "type4" -> 4;
+            case "type5" -> 5;
+            default -> 1; // Default to type1
         };
     }
 
@@ -78,7 +100,6 @@ public class DisasterCommand {
         ServerWorld world = source.getWorld();
         BlockPos pos = BlockPos.ofFloored(source.getPosition());
         
-        // Spawn FBI
         if (type.equals("fbi") || type.equals("war")) {
             for (int i = 0; i < 50; i++) {
                 EntityFBI fbi = new EntityFBI(EntityRegistry.FBI_AGENT, world);
@@ -89,7 +110,6 @@ public class DisasterCommand {
             }
         }
 
-        // Spawn Mafia
         if (type.equals("mafia") || type.equals("war")) {
             for (int i = 0; i < 50; i++) {
                 EntityMafia mafia = new EntityMafia(EntityRegistry.MAFIA_MEMBER, world);
@@ -100,13 +120,11 @@ public class DisasterCommand {
             }
         }
 
-        // Feedbacks
         switch (type) {
             case "fbi" -> source.sendFeedback(() -> Text.literal("§l§c[!] FBI RAID IN PROGRESS"), true);
             case "mafia" -> source.sendFeedback(() -> Text.literal("§l§8[!] MAFIA TAKEOVER STARTED"), true);
             case "war" -> source.sendFeedback(() -> Text.literal("§4§l[!!!] TERRITORY WAR: FBI VS MAFIA"), true);
         }
-
         return 1;
     }
 }
