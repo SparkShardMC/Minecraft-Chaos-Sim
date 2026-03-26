@@ -1,59 +1,30 @@
-# --- Java & Gradle ---
-.gradle/
-build/
-bin/
-out/
-.gradle-snapshot-*
-gradle-app.setting
+name: Build Mod
+on: [push, pull_request]
 
-# --- IntelliJ IDEA ---
-.idea/
-*.iws
-*.iml
-*.ipr
-out/
-!/.idea/icon.png
-!/.idea/runConfigurations/
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-# --- Eclipse ---
-.metadata/
-.classpath
-.project
-.settings/
-.factorypath
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'microsoft'
 
-# --- Visual Studio Code ---
-.vscode/
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/wrapper-validation@v3
 
-# --- Minecraft Run Directory (The most important part!) ---
-# This prevents your test worlds and logs from being uploaded.
-run/
-runClient/
-runServer/
-runData/
-saves/
-logs/
-screenshots/
-resourcepacks/
-shaderpacks/
-mods/
-config/
-usercache.json
-usernamecache.json
-whitelist.json
-ops.json
-server.properties
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-# --- OS Specific ---
-.DS_Store
-thumbs.db
+      - name: Build with Gradle
+        run: chmod +x gradlew && ./gradlew build
 
-# --- Replay Mod & Recording Junk ---
-replay_recordings/
-replay_videos/
-.replaymod/
-
-# --- Chaos Sim Specific ---
-# If you generate local name lists or temp AI logs
-temp_ai_logs/
-bot_configs/*.local.json
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ChaosMod-JAR
+          path: build/libs/*.jar
