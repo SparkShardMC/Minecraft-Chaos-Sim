@@ -7,15 +7,22 @@ version = "1.0.0"
 group = "com.sparkshard.chaos"
 
 repositories {
+    maven { url "https://maven.fabricmc.net/" }
     maven { url "https://maven.curseforge.com" }
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 dependencies {
-    // Minecraft and Fabric Essentials
     minecraft "com.mojang:minecraft:1.21"
     mappings "net.fabricmc:yarn:1.21+build.2:v2"
     modImplementation "net.fabricmc:fabric-loader:0.15.11"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
+
+    // This is the specific line that tells GitHub how to find the Tornado mod
+    // Format: curse.maven:<plugin-name>-<project-id>:<file-id>
+    modImplementation "curse.maven:weather-storms-tornadoes-237333:5600000"
+}
 
     // Fabric API (Required for most mods)
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
