@@ -13,6 +13,10 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import com.sparkshard.chaos.util.HailHandler;
+import com.sparkshard.chaos.util.SandstormHandler;
+import com.sparkshard.chaos.util.BlizzardHandler;
+import com.sparkshard.chaos.util.FirenadoHandler;
 
 public class DisasterCommand {
     public static void register(CommandDispatcher<ServerCommandSource, ?> dispatcher) {
