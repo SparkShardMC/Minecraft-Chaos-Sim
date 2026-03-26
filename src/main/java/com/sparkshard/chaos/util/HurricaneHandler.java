@@ -9,39 +9,30 @@ import weather2.weathersystem.storm.StormObject;
 
 public class HurricaneHandler {
 
-    public static void spawnHurricane(ServerWorld world, BlockPos pos) {
+    public static void spawnHurricane(ServerWorld world, BlockPos pos, int intensity) {
         WeatherManagerServer manager = ServerTickHandler.getWeatherSystemForDimension(world);
 
         if (manager != null) {
             StormObject hurricane = new StormObject(manager);
             hurricane.pos = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
             
-            // In Weather2 Remastered, stormType 2 or 3 usually represents 
-            // massive tropical cyclones/hurricanes
+            // Keeps the internal ID as Hurricane (Type 2)
             hurricane.stormType = 2; 
             
-            // Hurricanes have a MASSIVE radius compared to tornadoes
-            hurricane.maxRadius = 600; 
+            // This is where your "Type 1-5" logic actually lives!
+            // It scales the stage of the storm from a tropical gale to a Cat 5.
+            hurricane.levelCurIntensityStage = intensity;
             
-            // Set to high intensity (Category 5)
-            hurricane.levelCurIntensityStage = 5;
+            // Scale the size: Type 1 = 200 blocks, Type 5 = 700 blocks
+            hurricane.maxRadius = 150 + (intensity * 110); 
             
-            // Force widespread wind instead of a localized funnel
+            // Essential Hurricane Flags
             hurricane.isHurricane = true;
+            hurricane.isDirectCreation = true;
             
+            // Add and Sync
             manager.addStormObject(hurricane);
             manager.syncStormUpdate(hurricane);
         }
-    }
-
-    /**
-     * Logic to make the FBI and Mafia struggle against the wind
-     */
-    public static void applyHurricanePhysics(ServerWorld world, Vec3d stormPos) {
-        world.getPlayers().forEach(player -> {
-            // Push everything in a circular motion around the eye
-            Vec3d push = new Vec3d(0.1, 0, 0.1); 
-            player.addVelocity(push.x, push.y, push.z);
-        });
     }
 }
