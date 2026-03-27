@@ -10,6 +10,7 @@ repositories {
     maven { url "https://maven.fabricmc.net/" }
     maven { url "https://maven.curseforge.com" }
     maven { url "https://jitpack.io" }
+    maven { url "https://curse.maven" }
     mavenCentral()
 }
 
@@ -18,26 +19,16 @@ dependencies {
     mappings "net.fabricmc:yarn:1.21+build.2:v2"
     modImplementation "net.fabricmc:fabric-loader:0.15.11"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
+    
+    // GeckoLib for the FBI/Mafia models
     modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.5.2"
 
-    // This is the specific line that tells GitHub how to find the Tornado mod
-    // Format: curse.maven:<plugin-name>-<project-id>:<file-id>
+    // Tornadoes Mod
     modImplementation "curse.maven:weather-storms-tornadoes-237333:5600000"
-}
-
-    // Fabric API (Required for most mods)
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
-
-    // --- THE DISASTER ENGINE ---
-    // This connects your mod to "Weather & Tornadoes Remastered"
-    // The numbers at the end (237333:5555555) are the Project ID and File ID for the mod
-    modImplementation "curse.maven:weather-storms-tornadoes-237333:5600000" 
 }
 
 processResources {
     inputs.property "version", project.version
-    filteringCharset "UTF-8"
-
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
@@ -51,10 +42,4 @@ java {
     withSourcesJar()
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
-}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
 }
