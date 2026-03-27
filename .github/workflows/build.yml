@@ -14,20 +14,20 @@ jobs:
           java-version: '21'
           distribution: 'microsoft'
 
-      - name: Force Install Gradle Wrapper
+      - name: Force Build with Settings Fix
         run: |
-          # 1. Find where your project lives
+          # 1. Find the project folder
           PROJECT_DIR=$(find . -name "build.gradle" -exec dirname {} \;)
           cd $PROJECT_DIR
-          echo "Building in: $(pwd)"
           
-          # 2. This fixes the "Missing JAR" error by installing a fresh Gradle
-          wget https://services.gradle.org/distributions/gradle-8.9-bin.zip
+          # 2. CREATE THE MISSING SETTINGS FILE (This fixes the IMG_0069 error)
+          echo "pluginManagement { repositories { maven { url 'https://maven.fabricmc.net/' }; gradlePluginPortal() } }" > settings.gradle
+          echo "rootProject.name = 'chaos-mod'" >> settings.gradle
+
+          # 3. Install Gradle and Build
+          wget -q https://services.gradle.org/distributions/gradle-8.9-bin.zip
           unzip -q gradle-8.9-bin.zip
-          export PATH=$PATH:$(pwd)/gradle-8.9/bin
-          
-          # 3. Use the fresh Gradle to build the mod
-          gradle build --no-daemon
+          ./gradle-8.9/bin/gradle build --no-daemon
           
       - name: Upload Finished Mod
         uses: actions/upload-artifact@v4
