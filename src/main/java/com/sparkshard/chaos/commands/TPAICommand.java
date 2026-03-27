@@ -5,7 +5,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.entity.Entity;
 
 public class TPAICommand {
@@ -15,19 +14,14 @@ public class TPAICommand {
             .then(CommandManager.argument("name", StringArgumentType.string())
                 .executes(context -> {
                     String targetName = StringArgumentType.getString(context, "name");
-                    ServerPlayerEntity player = context.getSource().getPlayerOrException();
+                    var player = context.getSource().getPlayer();
                     
                     for (Entity entity : context.getSource().getWorld().iterateEntities()) {
-                        if (entity.hasCustomName() && 
-                            entity.getCustomName().getString().equalsIgnoreCase(targetName)) {
-                            
+                        if (entity.hasCustomName() && entity.getCustomName().getString().equalsIgnoreCase(targetName)) {
                             player.teleport(entity.getX(), entity.getY(), entity.getZ(), false);
-                            context.getSource().sendFeedback(() -> Text.literal("§aTeleported to §f" + targetName), true);
                             return 1;
                         }
                     }
-
-                    context.getSource().sendError(Text.literal("§cEntity '" + targetName + "' not found!"));
                     return 0;
                 })
             )
