@@ -10,7 +10,7 @@ repositories {
     maven { url "https://maven.fabricmc.net/" }
     maven { url "https://maven.curseforge.com" }
     maven { url "https://jitpack.io" }
-    maven { url "https://curse.maven" }
+    maven { url "https://www.cursemaven.com" } // Fixed CurseMaven URL
     mavenCentral()
 }
 
@@ -19,27 +19,10 @@ dependencies {
     mappings "net.fabricmc:yarn:1.21+build.2:v2"
     modImplementation "net.fabricmc:fabric-loader:0.15.11"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
-    
-    // GeckoLib for the FBI/Mafia models
+
+    // GeckoLib (Animations)
     modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.5.2"
 
-    // Tornadoes Mod
+    // Weather, Storms & Tornadoes (CurseForge ID: 237333)
     modImplementation "curse.maven:weather-storms-tornadoes-237333:5600000"
-}
-
-processResources {
-    inputs.property "version", project.version
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
-}
-
-java {
-    withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
 }
