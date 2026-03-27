@@ -2,34 +2,32 @@ package com.sparkshard.chaos.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.text.Text;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.entity.Entity;
 
 public class TPAICommand {
-
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("tpai")
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+        dispatcher.register(CommandManager.literal("tpai")
             .requires(source -> source.hasPermission(2))
-            .then(Commands.argument("name", StringArgumentType.string())
+            .then(CommandManager.argument("name", StringArgumentType.string())
                 .executes(context -> {
                     String targetName = StringArgumentType.getString(context, "name");
-                    ServerPlayer player = context.getSource().getPlayerOrException();
+                    ServerPlayerEntity player = context.getSource().getPlayerOrException();
                     
-                    for (Entity entity : context.getSource().getLevel().getAllEntities()) {
+                    for (Entity entity : context.getSource().getWorld().iterateEntities()) {
                         if (entity.hasCustomName() && 
                             entity.getCustomName().getString().equalsIgnoreCase(targetName)) {
                             
-                            player.teleportTo(entity.getX(), entity.getY(), entity.getZ());
-                            context.getSource().sendSuccess(() -> 
-                                Component.literal("§aTeleported to §f" + targetName), true);
+                            player.teleport(entity.getX(), entity.getY(), entity.getZ(), false);
+                            context.getSource().sendFeedback(() -> Text.literal("§aTeleported to §f" + targetName), true);
                             return 1;
                         }
                     }
 
-                    context.getSource().sendFailure(Component.literal("§cEntity '" + targetName + "' not found!"));
+                    context.getSource().sendError(Text.literal("§cEntity '" + targetName + "' not found!"));
                     return 0;
                 })
             )
