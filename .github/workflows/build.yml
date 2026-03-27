@@ -14,20 +14,20 @@ jobs:
           java-version: '21'
           distribution: 'microsoft'
 
-      - name: Make Gradlew Executable
+      - name: Find and Build
         run: |
-          cd Minecraft-Chaos-Sim
+          # This command finds where gradlew is and moves there
+          GRADLEW_PATH=$(find . -name gradlew | head -n 1)
+          GRADLE_DIR=$(dirname $GRADLEW_PATH)
+          cd $GRADLE_DIR
+          
+          echo "Found gradlew in $GRADLE_DIR, starting build..."
           chmod +x gradlew
-
-      - name: Build with Gradle
-        run: |
-          cd Minecraft-Chaos-Sim
-          # --no-daemon prevents the "0% hang" on cloud servers
-          # --stacktrace shows us exactly what's wrong if it fails
-          ./gradlew build --no-daemon --stacktrace
+          ./gradlew build --no-daemon
           
       - name: Upload Finished Mod
         uses: actions/upload-artifact@v4
         with:
           name: Chaos-Mod-Jar
-          path: Minecraft-Chaos-Sim/build/libs/*.jar
+          # This searches for the jar no matter where it was built
+          path: "**/build/libs/*.jar"
