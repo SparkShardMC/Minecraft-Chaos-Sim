@@ -1,16 +1,19 @@
 plugins {
+    // Loom 1.9 or higher is needed for the new naming system
     id "fabric-loom" version "1.9-SNAPSHOT"
 }
 
 dependencies {
-    // 1.21.11 PRECISION SETUP
+    // 1.21.11 Precision Setup
     minecraft "com.mojang:minecraft:1.21.11_unobfuscated"
-    mappings loom.officialMojangMappings()
     
+    // Since it's not scrambled, we use Official Mappings directly
+    mappings loom.officialMojangMappings() 
+
     modImplementation "net.fabricmc:fabric-loader:0.16.9"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.139.4+1.21.11_unobfuscated"
 
-    // Your Mods
+    // Chaos Dependencies
     modImplementation "curse.maven:geckolib-388172:5943793"
     modImplementation "curse.maven:weather-storms-tornadoes-237333:5603539"
     modImplementation "curse.maven:coroutil-237749:5589020"
