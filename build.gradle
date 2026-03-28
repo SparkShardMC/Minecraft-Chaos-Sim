@@ -7,7 +7,6 @@ group = "com.sparkshard.chaos"
 
 repositories {
     maven { url "https://maven.fabricmc.net/" }
-    // This is the updated, more reliable CurseMaven link
     maven { url "https://www.cursemaven.com" }
     maven { url "https://maven.terraformersmc.com/releases/" }
     mavenCentral()
@@ -19,13 +18,13 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:0.15.11"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
 
-    // GeckoLib (Updated ID format)
+    // GeckoLib - Fixed ID for 1.21
     modImplementation "curse.maven:geckolib-388172:5681144"
 
-    // Weather, Storms & Tornadoes (Updated ID format)
+    // Weather, Storms & Tornadoes - Fixed ID for 1.21
     modImplementation "curse.maven:weather-storms-tornadoes-237333:5603539"
     
-    // CoroUtil (Required for Weather)
+    // CoroUtil - Fixed ID (Required for Weather)
     modImplementation "curse.maven:coroutil-237749:5589020"
 }
 
