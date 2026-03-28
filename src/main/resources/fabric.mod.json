@@ -21,15 +21,16 @@
   },
   "mixins": [
     "chaos.mixins.json"
-  ],"depends": {
-    "fabricloader": ">=0.15.11",
-    "minecraft": "~1.21",
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21.4",
     "java": ">=21",
     "fabric-api": "*",
     "geckolib": "*",
     "coroutil": "*",
     "weather2": "*"
-}
+  },
   "recommends": {
     "modmenu": "*"
   },
