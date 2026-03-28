@@ -14,22 +14,16 @@ jobs:
           java-version: '21'
           distribution: 'microsoft'
 
-      - name: Force Build with Settings Fix
-        run: |
-          PROJECT_DIR=$(find . -name "build.gradle" -exec dirname {} \;)
-          cd $PROJECT_DIR
-          
-          # Create settings file to find Fabric Maven
-          echo "pluginManagement { repositories { maven { url 'https://maven.fabricmc.net/' }; gradlePluginPortal() } }" > settings.gradle
-          echo "rootProject.name = 'chaos-mod'" >> settings.gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.11 # This is the missing piece for 1.21.11
 
-          # Install Gradle 8.11 (Required for Loom 1.9)
-          wget -q https://services.gradle.org/distributions/gradle-8.11-bin.zip
-          unzip -q gradle-8.11-bin.zip
-          ./gradle-8.11/bin/gradle build --no-daemon
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon
           
-      - name: Upload Finished Mod
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Chaos-Mod-Jar
+          name: ChaosMod-JAR
           path: "**/build/libs/*.jar"
