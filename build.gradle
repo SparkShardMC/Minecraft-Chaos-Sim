@@ -13,16 +13,16 @@ repositories {
 }
 
 dependencies {
-    // UPDATED FOR 1.21.4 (Latest Stable)
-    minecraft "com.mojang:minecraft:1.21.4"
-    mappings "net.fabricmc:yarn:1.21.4+build.2:v2"
+    // TARGETING 1.21.11
+    minecraft "com.mojang:minecraft:1.21.11"
+    mappings "net.fabricmc:yarn:1.21.11+build.1:v2"
     modImplementation "net.fabricmc:fabric-loader:0.16.9"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.113.0+1.21.4"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.113.0+1.21.11"
 
-    // GeckoLib (1.21.4 compatible)
+    // GeckoLib (Latest for 1.21.x)
     modImplementation "curse.maven:geckolib-388172:5943793"
 
-    // Weather, Storms & Tornadoes + CoroUtil
+    // Weather & CoroUtil
     modImplementation "curse.maven:weather-storms-tornadoes-237333:5603539"
     modImplementation "curse.maven:coroutil-237749:5589020"
 }
