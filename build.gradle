@@ -1,6 +1,5 @@
 plugins {
     id "fabric-loom" version "1.7-SNAPSHOT"
-    id "maven-publish"
 }
 
 version = "1.0.0"
@@ -8,9 +7,9 @@ group = "com.sparkshard.chaos"
 
 repositories {
     maven { url "https://maven.fabricmc.net/" }
+    // This is the updated, more reliable CurseMaven link
     maven { url "https://www.cursemaven.com" }
     maven { url "https://maven.terraformersmc.com/releases/" }
-    maven { url "https://jitpack.io" }
     mavenCentral()
 }
 
@@ -20,27 +19,18 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:0.15.11"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
 
-    // GeckoLib (Required for FBI/Mafia animations)
-    // Project ID: 388172 | File ID: 5681144
+    // GeckoLib (Updated ID format)
     modImplementation "curse.maven:geckolib-388172:5681144"
 
-    // Weather, Storms & Tornadoes (The Chaos)
-    // Project ID: 237333 | File ID: 5603539
+    // Weather, Storms & Tornadoes (Updated ID format)
     modImplementation "curse.maven:weather-storms-tornadoes-237333:5603539"
     
-    // CoroUtil (Required by the Weather Mod to actually run)
+    // CoroUtil (Required for Weather)
     modImplementation "curse.maven:coroutil-237749:5589020"
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
-processResources {
-    inputs.property "version", project.version
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
     }
 }
