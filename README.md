@@ -56,7 +56,7 @@ Powered by a custom **Baritone API** bridge, agents follow a three-stage surviva
 
 ---
 
-## 📝 NOTE: There are a lot of particles and entities that will be spawning, to not risk overloading the device, sodium is required. 
+## 📝 NOTE: There are a lot of particles and entities that will be spawning, to not risk overloading the device, sodium is required. And I was 40k feet in the air above las vegas while doing this lol🤣
 
 ## 🚀 Development Quick Start
 If you are building this in a **GitHub Codespace**:
